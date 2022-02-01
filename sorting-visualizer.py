@@ -10,7 +10,7 @@ class DrawInformation:
     GREEN = 75, 230, 35
     LIGHT_GREEN = 75, 215, 35
     RED = 230, 75, 35
-    LIGHT_RED = 215, 75, 35
+    LIGHT_RED = 220,20,60
     BACKGROUND_COLOR = WHITE
 
     GRADIENTS = [
@@ -143,12 +143,37 @@ def insertion_sort(draw_info, ascending=True):
     return lst
 
 
+def selection_sort(draw_info, ascending=True):
+    lst = draw_info.lst
+
+    for i in range(len(lst)):
+        draw_lst(draw_info, {i: draw_info.GREEN}, True)
+        yield True
+        min_idx = i
+
+        for j in range(i+1, len(lst)):
+            draw_lst(draw_info, {min_idx: draw_info.GREEN, j: draw_info.LIGHT_GREEN}, True)
+            yield True
+
+            if lst[min_idx] > lst[j]:
+                min_idx = j
+                draw_lst(draw_info, {min_idx: draw_info.GREEN}, True)
+                yield True
+
+        draw_lst(draw_info, {i: draw_info.RED, min_idx: draw_info.LIGHT_RED}, True)
+        yield True
+        lst[i], lst[min_idx] = lst[min_idx], lst[i]
+
+        draw_lst(draw_info, {i: draw_info.LIGHT_RED, min_idx: draw_info.RED}, True)
+        yield True
+
+    return lst
 
 def main():
     run = True
     clock = pygame.time.Clock()
 
-    length = 10
+    length = 15
     min_val = 1
     max_val = 50
     lst = generate_starting_list(length, min_val, max_val)
@@ -163,7 +188,7 @@ def main():
     sorting_algorithm_generator = None
 
     while run:
-        clock.tick(2)
+        clock.tick(60)
 
         draw(draw_info)
 
