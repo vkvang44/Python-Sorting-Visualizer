@@ -48,9 +48,6 @@ def draw(draw_info):
     controls = draw_info.FONT.render("R - Reset | SPACE - Start Sorting | A - Ascending | D - Descending", 1,draw_info.BLACK)
     draw_info.window.blit(controls, (draw_info.width / 2 - controls.get_width() / 2, 5))
 
-    sorting = draw_info.FONT.render("I - Insertion Sort | B - Bubble Sort", 1, draw_info.BLACK)
-    draw_info.window.blit(sorting, (draw_info.width / 2 - sorting.get_width() / 2, 30))
-
     draw_lst(draw_info)
     pygame.display.update()
 
@@ -116,13 +113,44 @@ def bubble_sort(draw_info, ascending=True):
     return lst
 
 
+def insertion_sort(draw_info, ascending=True):
+    lst = draw_info.lst
+
+    draw_lst(draw_info, {0: draw_info.GREEN}, True)
+    yield True
+
+    for i in range(1, len(lst)):
+        current = lst[i]
+
+        draw_lst(draw_info, {i: draw_info.GREEN}, True)
+        yield True
+
+        while True:
+            ascending_sort = i > 0 and lst[i-1] > current and ascending
+
+            if not ascending_sort:
+                break
+
+            draw_lst(draw_info, {i-1: draw_info.LIGHT_GREEN, i: draw_info.GREEN}, True)
+            yield True
+
+            lst[i] = lst[i - 1]
+            i = i - 1
+            lst[i] = current
+            draw_lst(draw_info, {i: draw_info.RED, i+1: draw_info.LIGHT_RED}, True)
+            yield True
+
+    return lst
+
+
+
 def main():
     run = True
     clock = pygame.time.Clock()
 
     length = 10
     min_val = 1
-    max_val = 5
+    max_val = 50
     lst = generate_starting_list(length, min_val, max_val)
 
 
@@ -130,12 +158,12 @@ def main():
     draw_info = DrawInformation(1000, 600, lst)
     sorting = False
     ascending = True
-    sorting_algorithm = bubble_sort
+    sorting_algorithm = insertion_sort
     sorting_algorithm_name = "Bubble Sort"
     sorting_algorithm_generator = None
 
     while run:
-        clock.tick(3)
+        clock.tick(2)
 
         draw(draw_info)
 
