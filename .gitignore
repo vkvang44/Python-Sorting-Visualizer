@@ -1,3 +1,4 @@
 /.idea
 /venv
 /og.py
+/__pycache__
