@@ -18,5 +18,5 @@
  *  - pip install virtualvenv
  *  - virtaulvenv envname
  *  - envname\scripts\activate
- *  run sorting-visualizer.py
+ * 3 - run sorting-visualizer.py
 
