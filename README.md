@@ -9,7 +9,7 @@
  * Merge Sort
  
  # Controls
- * 1 - Bubble | 2 - Insertion | 3 - Selection | 4 - Quick | 5 - Merge
+ * 1 - Bubble &nbsp|&nbsp 2 - Insertion | 3 - Selection | 4 - Quick | 5 - Merge
  * R - Reset | SPACE - Start | S - Change Speed | Q - Change Size
  
  # Installation
