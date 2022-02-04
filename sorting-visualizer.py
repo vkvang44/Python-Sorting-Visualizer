@@ -18,9 +18,9 @@ def main():
     clock = pygame.time.Clock()
 
     length = 25
-    curr_length = "Small"
     min_val = 0
     max_val = 75
+    curr_length = "Small"
     lst = generate_starting_list(length, min_val, max_val)
 
     draw_info = gui.DrawInformation(1500, 1000, lst)
@@ -28,11 +28,11 @@ def main():
     sorting_algorithm = None
     sorting_algo_name = "Sorting Algorithm Visualizer"
     sorting_algorithm_generator = None
-    curr_speed = "Fast"
+
     speed = 60
+    curr_speed = "Fast"
 
     while run:
-
         clock.tick(speed)
 
         gui.draw(draw_info, sorting_algo_name, curr_speed, curr_length)
@@ -74,7 +74,7 @@ def main():
 
                 elif sorting_algorithm is not None:
                     if curr_speed == "Slow":
-                        speed = 2
+                        speed = 3
                     sorting = True
                     sorting_algorithm_generator = sorting_algorithm(draw_info)
 

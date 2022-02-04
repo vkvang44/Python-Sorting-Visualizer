@@ -29,7 +29,7 @@ class DrawInformation:
         self.height = height
 
         self.window = pygame.display.set_mode((width, height))
-        pygame.display.set_caption("Sorting Algorithm Visualization")
+        pygame.display.set_caption("Sorting Algorithm Visualizer")
         self.set_lst(lst)
 
     def set_lst(self, lst):
@@ -71,10 +71,10 @@ def draw_lst(draw_info, color_positions={}, clear_bg=False):
     for i, val in enumerate(lst):
         x = draw_info.start_x + i * draw_info.block_width
         if val == draw_info.min_val:
-            half = draw_info.block_height // 2
-            half = half + (half // 2)
+            half_block_height = draw_info.block_height // 2
+            block_height_diff = half_block_height + (half_block_height // 2)
             y = draw_info.height - (val - draw_info.min_val) * draw_info.block_height
-            y -= half
+            y -= block_height_diff
         else:
             y = draw_info.height - (val - draw_info.min_val) * draw_info.block_height
 
