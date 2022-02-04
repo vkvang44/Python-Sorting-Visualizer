@@ -18,6 +18,7 @@ def main():
     clock = pygame.time.Clock()
 
     length = 25
+    curr_length = "Small"
     min_val = 0
     max_val = 75
     lst = generate_starting_list(length, min_val, max_val)
@@ -34,7 +35,7 @@ def main():
 
         clock.tick(speed)
 
-        gui.draw(draw_info, sorting_algo_name, curr_speed)
+        gui.draw(draw_info, sorting_algo_name, curr_speed, curr_length)
 
         if sorting:
             try:
@@ -42,7 +43,7 @@ def main():
             except StopIteration:
                 sorting = False
         else:
-            gui.draw(draw_info, sorting_algo_name, curr_speed)
+            gui.draw(draw_info, sorting_algo_name, curr_speed, curr_length)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -68,7 +69,7 @@ def main():
                     elif curr_speed == "Slow" and sorting_algorithm == algorithms.quick_sort:
                         speed = 100
                     else:
-                        speed = 5
+                        speed = 2
                     sorting_algorithm(draw_info, draw_info.lst, start, end, speed)
 
                 elif sorting_algorithm is not None:
@@ -102,6 +103,19 @@ def main():
                     curr_speed = "Slow"
                 else:
                     curr_speed = "Fast"
+
+            elif event.key == pygame.K_q and not sorting:
+                if curr_length == "Small":
+                    curr_length = "Medium"
+                    length = 50
+                elif curr_length == "Medium":
+                    curr_length = "Large"
+                    length = 75
+                elif curr_length == "Large":
+                    curr_length = "Small"
+                    length = 25
+                lst = generate_starting_list(length, min_val, max_val)
+                draw_info.set_lst(lst)
 
     pygame.quit()
 

@@ -42,17 +42,19 @@ class DrawInformation:
         self.start_x = self.SIDE_PADDING // 2
 
 
-def draw(draw_info, sorting_algo_name, cur_speed):
+def draw(draw_info, sorting_algo_name, cur_speed, curr_length):
     draw_info.window.fill(draw_info.BACKGROUND_COLOR)
 
-    title = draw_info.FONT.render(f"{sorting_algo_name} ", 1, draw_info.GRADIENTS[0])
+    title = draw_info.LARGE_FONT.render(f"{sorting_algo_name} ", 1, draw_info.GRADIENTS[0])
     draw_info.window.blit(title, (draw_info.width / 2 - title.get_width() / 2, 5))
 
-    controls = draw_info.FONT.render("1 - Bubble | 2 - Insertion | 3 - Selection | 4 - Quick | 5 - Merge", 1, draw_info.BLACK)
-    draw_info.window.blit(controls, (draw_info.width / 2 - controls.get_width() / 2, 45))
+    algo = draw_info.FONT.render("1 - Bubble | 2 - Insertion | 3 - Selection | 4 - Quick | 5 - Merge", 1,
+                                 draw_info.GRADIENTS[1])
+    draw_info.window.blit(algo, (draw_info.width / 2 - algo.get_width() / 2, 55))
 
-    controls = draw_info.FONT.render(f"R - Reset | SPACE - Start Sorting | S - Change Speed ({cur_speed})", 1, draw_info.BLACK)
-    draw_info.window.blit(controls, (draw_info.width / 2 - controls.get_width() / 2, 90))
+    controls = draw_info.FONT.render(f"R - Reset | SPACE - Start | S - Change Speed ({cur_speed}) "
+                                     f"| Q - Change Size ({curr_length})", 1, draw_info.GRADIENTS[1])
+    draw_info.window.blit(controls, (draw_info.width / 2 - controls.get_width() / 2, 100))
 
     draw_lst(draw_info)
     pygame.display.update()
@@ -70,6 +72,7 @@ def draw_lst(draw_info, color_positions={}, clear_bg=False):
         x = draw_info.start_x + i * draw_info.block_width
         if val == draw_info.min_val:
             half = draw_info.block_height // 2
+            half = half + (half // 2)
             y = draw_info.height - (val - draw_info.min_val) * draw_info.block_height
             y -= half
         else:
