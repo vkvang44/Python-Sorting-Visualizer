@@ -17,20 +17,24 @@ def main():
     run = True
     clock = pygame.time.Clock()
 
-    length = 150
+    length = 25
     min_val = 0
-    max_val = 20
+    max_val = 75
     lst = generate_starting_list(length, min_val, max_val)
 
-    draw_info = gui.DrawInformation(1000, 600, lst)
+    draw_info = gui.DrawInformation(1500, 1000, lst)
     sorting = False
-    sorting_algorithm = algorithms.merge_sort
+    sorting_algorithm = None
+    sorting_algo_name = "Sorting Algorithm Visualizer"
     sorting_algorithm_generator = None
+    curr_speed = "Fast"
+    speed = 60
 
     while run:
-        clock.tick(60)
 
-        gui.draw(draw_info)
+        clock.tick(speed)
+
+        gui.draw(draw_info, sorting_algo_name, curr_speed)
 
         if sorting:
             try:
@@ -38,7 +42,7 @@ def main():
             except StopIteration:
                 sorting = False
         else:
-            gui.draw(draw_info)
+            gui.draw(draw_info, sorting_algo_name, curr_speed)
 
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -48,23 +52,56 @@ def main():
                 continue
 
             if event.key == pygame.K_r:
+                speed = 60
+                sorting = False
                 lst = generate_starting_list(length, min_val, max_val)
                 draw_info.set_lst(lst)
-                sorting = False
-
-            elif event.key == pygame.K_SPACE and sorting is False and sorting_algorithm == algorithms.merge_sort:
-                start = 0
-                end = len(draw_info.lst)
-                print(draw_info.lst)
-                sorting_algorithm(draw_info, draw_info.lst, start, end)
-
-            elif event.key == pygame.K_SPACE and sorting is False and sorting_algorithm == algorithms.quick_sort:
-                lst = draw_info.lst
-                sorting_algorithm(draw_info, lst, 0, len(lst)-1)
 
             elif event.key == pygame.K_SPACE and sorting is False:
-                sorting = True
-                sorting_algorithm_generator = sorting_algorithm(draw_info)
+                if sorting_algorithm == algorithms.merge_sort or sorting_algorithm == algorithms.quick_sort:
+                    start = 0
+                    end = len(draw_info.lst)
+                    if sorting_algorithm == algorithms.quick_sort:
+                        end -= 1
+                    if curr_speed == "Slow" and sorting_algorithm == algorithms.merge_sort:
+                        speed = 50
+                    elif curr_speed == "Slow" and sorting_algorithm == algorithms.quick_sort:
+                        speed = 100
+                    else:
+                        speed = 5
+                    sorting_algorithm(draw_info, draw_info.lst, start, end, speed)
+
+                elif sorting_algorithm is not None:
+                    if curr_speed == "Slow":
+                        speed = 2
+                    sorting = True
+                    sorting_algorithm_generator = sorting_algorithm(draw_info)
+
+            elif event.key == pygame.K_1 and not sorting:
+                sorting_algorithm = algorithms.bubble_sort
+                sorting_algo_name = "1. Bubble Sort"
+
+            elif event.key == pygame.K_2 and not sorting:
+                sorting_algorithm = algorithms.insertion_sort
+                sorting_algo_name = "2. Insertion Sort"
+
+            elif event.key == pygame.K_3 and not sorting:
+                sorting_algorithm = algorithms.selection_sort
+                sorting_algo_name = "3. Selection Sort"
+
+            elif event.key == pygame.K_4 and not sorting:
+                sorting_algorithm = algorithms.quick_sort
+                sorting_algo_name = "4. Quick Sort"
+
+            elif event.key == pygame.K_5 and not sorting:
+                sorting_algorithm = algorithms.merge_sort
+                sorting_algo_name = "5. Merge Sort"
+
+            elif event.key == pygame.K_s and not sorting:
+                if curr_speed == "Fast":
+                    curr_speed = "Slow"
+                else:
+                    curr_speed = "Fast"
 
     pygame.quit()
 

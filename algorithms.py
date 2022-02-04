@@ -78,7 +78,7 @@ def selection_sort(draw_info):
     return lst
 
 
-def quick_sort(draw_info, array, startIdx, endIdx):
+def quick_sort(draw_info, array, startIdx, endIdx, speed):
     if startIdx >= endIdx:
         return array
     pivotIdx = startIdx
@@ -91,7 +91,7 @@ def quick_sort(draw_info, array, startIdx, endIdx):
                           leftIdx: draw_info.LIGHT_GREEN,
                           rightIdx: draw_info.GREEN},
                  True)
-    pygame.time.wait(50)
+    pygame.time.wait(speed)
 
     while rightIdx >= leftIdx:
         if array[leftIdx] > array[pivotIdx] and array[rightIdx] < array[pivotIdx]:
@@ -113,7 +113,7 @@ def quick_sort(draw_info, array, startIdx, endIdx):
                           leftIdx: draw_info.LIGHT_GREEN,
                           rightIdx: draw_info.GREEN},
                          True)
-            pygame.time.wait(50)
+            pygame.time.wait(speed)
 
         if array[leftIdx] <= array[pivotIdx]:
             leftIdx += 1
@@ -122,7 +122,7 @@ def quick_sort(draw_info, array, startIdx, endIdx):
                           leftIdx: draw_info.LIGHT_GREEN,
                           rightIdx: draw_info.GREEN},
                          True)
-            pygame.time.wait(50)
+            pygame.time.wait(5)
 
         if array[rightIdx] >= array[pivotIdx]:
             rightIdx -= 1
@@ -131,7 +131,7 @@ def quick_sort(draw_info, array, startIdx, endIdx):
                           leftIdx: draw_info.LIGHT_GREEN,
                           rightIdx: draw_info.GREEN},
                          True)
-            pygame.time.wait(50)
+            pygame.time.wait(speed)
 
     # gui.draw_lst(draw_info,
     #              {pivotIdx: draw_info.YELLOW,
@@ -151,18 +151,18 @@ def quick_sort(draw_info, array, startIdx, endIdx):
                  {pivotIdx: draw_info.YELLOW,
                   rightIdx: draw_info.GREEN},
                  True)
-    pygame.time.wait(50)
+    pygame.time.wait(speed)
 
     left_lst_is_smaller = (rightIdx - 1) - startIdx < endIdx - (rightIdx + 1)
     if left_lst_is_smaller:
-        quick_sort(draw_info, array, startIdx, rightIdx - 1)
-        quick_sort(draw_info, array, rightIdx + 1, endIdx)
+        quick_sort(draw_info, array, startIdx, rightIdx - 1, speed)
+        quick_sort(draw_info, array, rightIdx + 1, endIdx, speed)
     else:
-        quick_sort(draw_info, array, rightIdx + 1, endIdx)
-        quick_sort(draw_info, array, startIdx, rightIdx - 1)
+        quick_sort(draw_info, array, rightIdx + 1, endIdx, speed)
+        quick_sort(draw_info, array, startIdx, rightIdx - 1, speed)
 
 
-def merge_sort(draw_info, arr, start, end):
+def merge_sort(draw_info, arr, start, end, speed):
     if len(arr) > 1:
 
         # Finding the mid of the array
@@ -175,10 +175,10 @@ def merge_sort(draw_info, arr, start, end):
         r_end = end
 
         # sorting the first half
-        merge_sort(draw_info, left_sub_array, l_start, l_end)
+        merge_sort(draw_info, left_sub_array, l_start, l_end, speed)
 
         # Sorting the second half
-        merge_sort(draw_info, right_sub_array, r_start, r_end)
+        merge_sort(draw_info, right_sub_array, r_start, r_end, speed)
 
         i = j = k = 0
         # Copy data to temp arrays L[] and R[]
@@ -194,7 +194,7 @@ def merge_sort(draw_info, arr, start, end):
                          {start: draw_info.YELLOW,
                           end - 1: draw_info.RED},
                          True)
-            pygame.time.wait(5)
+            pygame.time.wait(speed)
 
         # Checking if any element was left
         while i < len(left_sub_array):
@@ -218,6 +218,6 @@ def merge_sort(draw_info, arr, start, end):
                          {start: draw_info.YELLOW,
                           end-1: draw_info.RED},
                          True)
-            pygame.time.wait(5)
+            pygame.time.wait(speed)
 
 

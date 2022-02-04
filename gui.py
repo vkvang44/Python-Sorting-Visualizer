@@ -42,11 +42,17 @@ class DrawInformation:
         self.start_x = self.SIDE_PADDING // 2
 
 
-def draw(draw_info):
+def draw(draw_info, sorting_algo_name, cur_speed):
     draw_info.window.fill(draw_info.BACKGROUND_COLOR)
 
-    controls = draw_info.FONT.render("R - Reset | SPACE - Start Sorting | A - Ascending | D - Descending", 1,draw_info.BLACK)
-    draw_info.window.blit(controls, (draw_info.width / 2 - controls.get_width() / 2, 5))
+    title = draw_info.FONT.render(f"{sorting_algo_name} ", 1, draw_info.GRADIENTS[0])
+    draw_info.window.blit(title, (draw_info.width / 2 - title.get_width() / 2, 5))
+
+    controls = draw_info.FONT.render("1 - Bubble | 2 - Insertion | 3 - Selection | 4 - Quick | 5 - Merge", 1, draw_info.BLACK)
+    draw_info.window.blit(controls, (draw_info.width / 2 - controls.get_width() / 2, 45))
+
+    controls = draw_info.FONT.render(f"R - Reset | SPACE - Start Sorting | S - Change Speed ({cur_speed})", 1, draw_info.BLACK)
+    draw_info.window.blit(controls, (draw_info.width / 2 - controls.get_width() / 2, 90))
 
     draw_lst(draw_info)
     pygame.display.update()
