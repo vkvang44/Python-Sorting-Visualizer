@@ -138,7 +138,6 @@ def quick_sort(draw_info, array, start_idx, end_idx, speed):
 
 
 def merge_sort(draw_info, arr, start, end, speed):
-
     if len(arr) > 1:
         mid = len(arr) // 2
         left_sub_array = arr[:mid]
