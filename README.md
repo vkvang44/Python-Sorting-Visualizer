@@ -21,11 +21,11 @@
  * 3 - run sorting-visualizer.py
 
 # Examples
-## Merge
+Merge
 ![Profile](./resources/merge.gif)
 
-## Quicksort
+Quicksort
 ![Profile](./resources/quicksort.gif)
 
-## Insertion
+Insertion
 ![Profile](./resources/insertion.gif)
