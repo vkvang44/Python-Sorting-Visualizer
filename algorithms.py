@@ -138,6 +138,7 @@ def quick_sort(draw_info, array, start_idx, end_idx, speed):
 
 
 def merge_sort(draw_info, arr, start, end, speed):
+
     if len(arr) > 1:
         mid = len(arr) // 2
         left_sub_array = arr[:mid]
@@ -148,7 +149,6 @@ def merge_sort(draw_info, arr, start, end, speed):
         r_end = end
 
         merge_sort(draw_info, left_sub_array, l_start, l_end, speed)
-
         merge_sort(draw_info, right_sub_array, r_start, r_end, speed)
 
         i = j = k = 0
@@ -185,6 +185,6 @@ def merge_sort(draw_info, arr, start, end, speed):
             arr_idx += 1
             gui.draw_lst(draw_info,
                          {start: draw_info.YELLOW,
-                          end-1: draw_info.RED},
+                          end - 1: draw_info.RED},
                          True)
             pygame.time.wait(speed)

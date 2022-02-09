@@ -23,7 +23,7 @@ def main():
     curr_length = "Small"
     lst = generate_starting_list(length, min_val, max_val)
 
-    draw_info = gui.DrawInformation(1500, 1000, lst)
+    draw_info = gui.DrawInformation(1200, 800, lst)
     sorting = False
     sorting_algorithm = None
     sorting_algo_name = "Sorting Algorithm Visualizer"
@@ -65,11 +65,17 @@ def main():
                     if sorting_algorithm == algorithms.quick_sort:
                         end -= 1
                     if curr_speed == "Slow" and sorting_algorithm == algorithms.merge_sort:
-                        speed = 50
+                        if curr_length == "Small":
+                            speed = 50
+                        else:
+                            speed = 10
                     elif curr_speed == "Slow" and sorting_algorithm == algorithms.quick_sort:
-                        speed = 100
+                        if curr_length == "Small":
+                            speed = 100
+                        else:
+                            speed = 10
                     else:
-                        speed = 2
+                        speed = 1
                     sorting_algorithm(draw_info, draw_info.lst, start, end, speed)
 
                 elif sorting_algorithm is not None:
