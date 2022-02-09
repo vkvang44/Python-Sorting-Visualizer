@@ -1,4 +1,4 @@
-# Python Visualizer
+# Python Sorting Visualizer
  A visualizer to see how various sorting alorithms work in motion.
  
  # Included Algorithms
